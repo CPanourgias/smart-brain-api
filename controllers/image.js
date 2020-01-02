@@ -12,7 +12,7 @@ const handleApiCall = (req, res) => {
       res.json(data);
     })
     .catch(err => res.status(400).json('unable to work with API'))
-}
+};
 
 const handleImage = (req, res, db) => {
   const { id } = req.body;
