@@ -6,7 +6,7 @@ const knex = require('knex');
 const morgan = require('morgan');
 
 const register = require('./controllers/register');
-const signin = require('./controllers/signin');
+const signIn = require('./controllers/signIn');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
@@ -21,8 +21,10 @@ app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json());
 
+
 app.get('/', (req, res)=> { res.send(db.users) });
-app.post('/signin', signin.handleSignin(db, bcrypt));
+// app.post('/signin', signIn.handleSignIn(db, bcrypt));
+app.post('/signIn', signIn.signInAuthentication(db, bcrypt));
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) });
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db)});
 app.post('/profile/:id', (req, res) => { profile.handleProfileUpdate(req, res, db)});
